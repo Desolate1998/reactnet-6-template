@@ -1,24 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import { EchoApi } from './Domain/Api/Requests/echo';
 
 function App() {
+const [serverStatus, setServerStatus] = useState<string>('offline')
+
+  useEffect(() => {
+     EchoApi.echo().then(response =>{ 
+        
+      if(response.isSuccessful){
+          setServerStatus(response.data!);
+        }
+     });
+  }, [])
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>{serverStatus}</h1>
     </div>
   );
 }

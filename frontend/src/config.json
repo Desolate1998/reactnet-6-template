@@ -1,0 +1,8 @@
+{
+    "ApiDetails": {
+        "Route": "https://localhost:7173/",
+        "Headers": [
+            { "api-version": "1.0.1" }
+        ]
+    }
+}
