@@ -2,8 +2,7 @@ import { observer } from 'mobx-react-lite';
 import React, { useEffect, useState } from 'react'
 import {
   createBrowserRouter,
-  RouterProvider,
-  Route,
+  RouterProvider
 } from "react-router-dom";
 import { useStore } from '../../Domain/Stores/store'
 import { getRoutes } from '../../Domain/Utils/GetRoutes'
@@ -14,13 +13,13 @@ const RouterWrapper: React.FC = () => {
 
 
   useEffect(() => {
-
     var routes = [...getRoutes().map(item => {
       return {
         element: item.component,
         path: item.path,
       }
-    })]
+    })];
+
     setRouter(createBrowserRouter(routes));
   }, [AuthStore.token])
 

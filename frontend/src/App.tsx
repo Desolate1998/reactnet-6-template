@@ -1,11 +1,8 @@
 import { observer } from 'mobx-react-lite';
-import React, { useEffect, useState } from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import  { useEffect, useState } from 'react';
 import RouteWrapper from './Components/RouteWrapper/RouteWrapper';
-
 import { EchoApi } from './Domain/Api/Requests/echo';
 import { store } from './Domain/Stores/store';
-import { getRoutes } from './Domain/Utils/GetRoutes';
 
 function App() {
   const [serverStatus, setServerStatus] = useState<string>('offline')
@@ -23,13 +20,15 @@ function App() {
         setServerStatus(response.data!);
       }
     });
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [store.AuthStore.token])
 
   return (
     <div className="App">
       <p>{store.AuthStore.token}</p>
-      <h1>None Authed - {serverNoneAuthStatus}</h1>
-      <h1>Authed -  {serverStatus}</h1>
+      <h1>None Auth - {serverNoneAuthStatus}</h1>
+      <h1>Auth -  {serverStatus}</h1>
       <RouteWrapper/>
     </div>
   );

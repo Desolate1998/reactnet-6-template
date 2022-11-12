@@ -1,6 +1,4 @@
-﻿using Application.Services;
-using Application.Services_Interface;
-using DataAccess;
+﻿using Application.Services_Interface;
 using Domain.APIRequestModels;
 using Domain.ApiResponseModel;
 using Domain.Database;
@@ -17,14 +15,12 @@ public class AccountController : Controller
     private readonly UserManager<User> _userManager;
     private readonly SignInManager<User> _signInManager;
     private readonly ITokenService _tokenServices;
-    private readonly DataContext _dbContext;
 
-    public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, ITokenService tokenServices, DataContext dbContext)
+    public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, ITokenService tokenServices)
     {
         _userManager = userManager;
         _signInManager = signInManager;
         _tokenServices = tokenServices;
-        _dbContext = dbContext;
     }
 
 
@@ -32,7 +28,7 @@ public class AccountController : Controller
     public async Task<IActionResult> Register(RegisterRequestModel request)
     {
 
-        IdentityResult results = await _userManager.CreateAsync(
+        _ = await _userManager.CreateAsync(
             new User()
             {
                 Email = request.Email,
@@ -53,10 +49,10 @@ public class AccountController : Controller
 
         var result = await _signInManager.CheckPasswordSignInAsync(user, request.Password,
             false);
-        
+
         if (result.Succeeded)
         {
-            var token =  _tokenServices.CreateToken(user);
+            var token = _tokenServices.CreateToken(user);
             return Ok(new ApiResponse<string>()
             {
                 Data = token,
