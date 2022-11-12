@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Application.Services;
+using Application.Services_Interface;
 
 namespace Api.Extensions
 {
@@ -33,7 +34,7 @@ namespace Api.Extensions
                     ValidateAudience = false
                 };
             });
-            services.AddScoped<TokenService>();
+            services.AddScoped<ITokenService, TokenService>();
 
             return services;
 

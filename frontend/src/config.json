@@ -1,6 +1,6 @@
 {
     "ApiDetails": {
-        "Route": "https://localhost:7173/",
+        "Route": "https://localhost:44357/api/",
         "Headers": [
             { "api-version": "1.0.1" }
         ]

@@ -23,9 +23,19 @@ namespace Api.Controllers
         /// Echo check to see if the server is online
         /// </summary>
         /// <returns>string indicating the server is alive</returns>
-        [HttpGet("Echo")]
+        [HttpGet("Echo"),AllowAnonymous]
         public ActionResult<ApiResponse<string>> Echo()
         {   _logger.LogInformation($"Received echo request on {DateTime.UtcNow}");
+            return Ok(new ApiResponse<string>()
+            {
+                Data = "Online",
+                IsSuccessful = true
+            });
+        }
+        [HttpGet("EchoAuth")]
+        public ActionResult<ApiResponse<string>> EchoAuth()
+        {
+            _logger.LogInformation($"Received echo request on {DateTime.UtcNow}");
             return Ok(new ApiResponse<string>()
             {
                 Data = "Online",
