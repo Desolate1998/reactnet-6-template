@@ -3,8 +3,8 @@ import React, { useState } from 'react'
 import { store } from '../Domain/Stores/store';
 
 export const Login = () => {
-  const [password, setPassword] = useState("Pokemon1");
-  const [email, setEmail] = useState("ruandejongh2@outlook.com");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
 
   return (
     <div>  <h1>Login</h1>
